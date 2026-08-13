@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Diff – Compare Two JSON Files</title>
+  <meta name="description" content="Upload two JSON files and compare them side by side in your browser.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .diff-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .diff-card {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    .diff-card textarea {
+      min-height: 220px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      resize: vertical;
+    }
+
+    .diff-output {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 220px;
+      overflow: auto;
+    }
+
+    .diff-output:empty::before {
+      content: "Differences will appear here.";
+      color: #94a3b8;
+    }
+
+    .diff-item {
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding: 0.75rem 0;
+    }
+
+    .diff-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .diff-path {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #f8fafc;
+    }
+
+    .diff-values {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .diff-value {
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .diff-value--left {
+      color: #ff6b6b;
+    }
+
+    .diff-value--right {
+      color: #51cf66;
+    }
+
+    .diff-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+    }
+
+    .diff-value pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.9rem;
+      color: inherit;
+    }
+
+    .diff-empty {
+      color: #94a3b8;
+    }
+
+    .diff-error {
+      margin-top: 0.75rem;
+      color: #b91c1c;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Diff",
+    "url": "./",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "description": "Compare two JSON files or payloads directly in the browser."
+  }
+  </script>
+</head>
+<body data-root="../">
+  <div id="site-header"></div>
+
+  <main class="tool-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a> ›
+      <a href="../json-tools/">JSON Tools</a> ›
+      <span aria-current="page">JSON Diff</span>
+    </nav>
+
+    <h1>JSON Diff</h1>
+    <p class="tool-desc">Upload two JSON files or paste two JSON payloads to compare their structure and values.</p>
+
+    <div class="tool-body">
+      <form class="tool-form" id="json-diff-form">
+        <div class="diff-grid">
+          <div class="diff-card">
+            <label class="form-group" for="json-left-input">
+              <span>Left JSON</span>
+              <textarea id="json-left-input" placeholder='{"name":"A"}'></textarea>
+            </label>
+            <input id="json-left-file" type="file" accept=".json,application/json">
+          </div>
+          <div class="diff-card">
+            <label class="form-group" for="json-right-input">
+              <span>Right JSON</span>
+              <textarea id="json-right-input" placeholder='{"name":"B"}'></textarea>
+            </label>
+            <input id="json-right-file" type="file" accept=".json,application/json">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" id="compare-btn">Compare</button>
+          <button type="button" class="btn btn-secondary" id="clear-btn">Clear</button>
+        </div>
+
+        <div class="result-panel">
+          <div class="result-label">DIFFERENCES</div>
+          <div id="diff-output" class="diff-output" aria-live="polite"></div>
+          <div id="diff-error" class="diff-error" role="alert"></div>
+        </div>
+      </form>
+    </div>
+
+    <section class="info-card" aria-labelledby="privacy-heading">
+      <h2 id="privacy-heading">Privacy</h2>
+      <p>Files are read locally in your browser and are never stored or uploaded.</p>
+    </section>
+
+    <aside class="related-links">
+      <h2 class="related-links__title">Explore more</h2>
+      <ul class="related-links__list">
+        <li><a href="../json-formatter/">JSON Formatter</a></li>
+        <li><a href="../time-conversion/">Time Conversion Tools</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

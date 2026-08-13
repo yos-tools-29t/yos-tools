@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Tester – Test Regular Expressions Online</title>
+  <meta name="description" content="Test regular expressions against sample text in real time. Highlight matches, try flags, and debug patterns with this free online regex tester.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .regex-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .regex-card {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    .regex-card textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .regex-card textarea.error {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.15);
+    }
+
+    .regex-preview {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      line-height: 1.6;
+    }
+
+    .regex-highlight-match {
+      background: #51cf66;
+      color: #0f172a;
+      padding: 0 0.2rem;
+      border-radius: 3px;
+    }
+
+    .regex-highlight-group {
+      background: #339af0;
+      color: #fff;
+      padding: 0 0.2rem;
+      border-radius: 3px;
+    }
+
+    .regex-flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .regex-flag-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .regex-flag-btn.is-active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .regex-results {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .regex-result-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .regex-result-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+
+    .regex-result-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .regex-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .regex-preset {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .regex-preset:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .regex-flags-help {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      color: var(--text);
+    }
+
+    .regex-flags-help h2,
+    .regex-flags-help h3 {
+      color: var(--text);
+    }
+
+    .regex-flags-help pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+
+    .regex-error {
+      color: #ff6b6b;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Regex Tester",
+    "url": "./",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "description": "Test regular expressions against sample text in real time. Highlight matches, try flags, and debug patterns with this free online regex tester."
+  }
+  </script>
+</head>
+<body data-root="../">
+  <div id="site-header"></div>
+
+  <main class="tool-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a> ›
+      <a href="../regex-tools/">Regex Tools</a> ›
+      <span aria-current="page">Regex Tester</span>
+    </nav>
+
+    <h1>Regex Tester</h1>
+    <p class="tool-desc">Write a regular expression, choose flags, and see matches against your test string. Useful for debugging patterns before shipping them in code. Lightweight and mobile-friendly.</p>
+
+    <div class="tool-body">
+      <div id="regex-tester-app"></div>
+    </div>
+
+    <aside class="related-links">
+      <h2 class="related-links__title">Explore more</h2>
+      <ul class="related-links__list">
+        <li><a href="../regex-tools/">All Regex Tools</a></li>
+        <li><a href="../time-conversion/">Time Conversion Tools</a></li>
+        <li><a href="../json-tools/">JSON Tools</a></li>
+      </ul>
+      <p class="related-links__category">
+        <a href="../regex-tools/">Browse all Regex Tools</a>
+      </p>
+    </aside>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

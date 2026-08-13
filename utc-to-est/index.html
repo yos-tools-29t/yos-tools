@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTC to EST Converter – Fast Online Timezone Tool</title>
+  <meta name="description" content="Convert UTC to EST instantly with this fast, mobile-friendly timezone converter. Automatically detects daylight saving time (EDT).">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UTC to EST Converter",
+    "url": "./",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "description": "Convert UTC to EST instantly with this fast, mobile-friendly timezone converter. Automatically detects daylight saving time (EDT)."
+  }
+  </script>
+</head>
+<body data-root="../">
+  <div id="site-header"></div>
+
+  <main class="tool-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a> ›
+      <a href="../time-conversion/">Time Conversion Tools</a> ›
+      <span aria-current="page">UTC to EST</span>
+    </nav>
+
+    <h1>UTC to EST Converter</h1>
+    <p class="tool-desc">Convert UTC to Eastern Time instantly. Daylight saving is detected automatically — results show EST (UTC−5) or EDT (UTC−4). Enter a UTC date and time below, or use the current UTC time.</p>
+
+    <div class="tool-body">
+      <form id="utc-to-est-form" class="tool-form" novalidate>
+        <div class="form-group">
+          <label for="utc-input">UTC date &amp; time</label>
+          <input
+            type="datetime-local"
+            id="utc-input"
+            name="utc"
+            required
+            aria-describedby="utc-hint"
+          >
+          <p id="utc-hint" class="form-hint">Enter the time in Coordinated Universal Time (UTC). Example: 2024-07-15T14:30.</p>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="btn-convert">Convert</button>
+          <button type="button" class="btn btn-secondary" id="btn-current">Use current time</button>
+          <button type="button" class="btn btn-secondary" id="btn-clear">Clear</button>
+        </div>
+      </form>
+
+      <div class="result-panel" aria-live="polite">
+        <p class="result-label">Eastern Time (EST / EDT)</p>
+        <div class="result-row">
+          <p id="result-output" class="result-output">—</p>
+          <button type="button" class="btn btn-secondary btn-small result-copy-btn" id="btn-copy" disabled>Copy</button>
+        </div>
+        <p id="result-error" class="result-error" hidden></p>
+      </div>
+    </div>
+
+    <aside class="related-links">
+      <h2 class="related-links__title">More time conversion tools</h2>
+      <ul class="related-links__list">
+        <li><a href="../utc-to-pst/">UTC to PST</a></li>
+        <li><a href="../utc-to-ist/">UTC to IST</a></li>
+        <li><a href="../utc-to-jst/">UTC to JST</a></li>
+        <li><a href="../utc-to-cet/">UTC to CET</a></li>
+      </ul>
+      <p class="related-links__category">
+        <a href="../time-conversion/">Browse all Time Conversion Tools</a>
+      </p>
+    </aside>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

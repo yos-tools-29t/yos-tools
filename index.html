@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOS Tools — Free Online Utility Tools</title>
+  <meta name="description" content="YOS Tools offers free, lightweight online utilities. Browse time conversion, JSON, and regex tools — fast, mobile-friendly, and no signup required.">
+  <meta property="og:title" content="YOS Tools — Free Online Utility Tools">
+  <meta property="og:description" content="Fast, privacy-friendly utilities for time conversion, JSON formatting, and regex testing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yos-tools-29t.github.io/yos-tools/">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232563eb'/%3E%3Cpath d='M18 18h28v8H26v20h20v8H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="./sitemap.xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "YOS Tools",
+    "url": "./",
+    "description": "Free, lightweight online utilities for time conversion, JSON formatting, and regex testing."
+  }
+  </script>
+
+  <!-- subtle tagline styling -->
+  <style>
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: -10px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .tool-card.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: default;
+    }
+    .tool-card__usage {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0.75rem 0 0.9rem;
+    }
+    .tool-card__cta {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+  </style>
+</head>
+
+<body data-root="./">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <h1>YOS Tools</h1>
+      <p class="tagline">Your Online Solutions</p>
+
+      <p>
+        Free, lightweight online utilities built for speed. Pick a category below to convert timezones, work with JSON, or test regular expressions — no signup required.
+        <a href="./about/">About YOS Tools</a>
+      </p>
+    </section>
+
+    <section class="tools-section" aria-labelledby="categories-heading">
+      <h2 id="categories-heading" class="section-heading">Tool Categories</h2>
+
+      <div class="tools-grid">
+        <!-- Active -->
+        <a class="tool-card" href="./time-conversion/">
+          <h3>Time Conversion Tools</h3>
+          <p>Convert UTC to major time zones quickly for meetings, logs, and scheduling.</p>
+          <p class="tool-card__usage">Use case: compare a UTC timestamp with local time before sharing it.</p>
+          <span class="card-meta">5 tools</span>
+          <span class="tool-card__cta">Try now →</span>
+        </a>
+
+        <a class="tool-card" href="./json-tools/">
+          <h3>JSON Tools</h3>
+          <p>Beautify, validate, and compare JSON without uploading your data anywhere.</p>
+          <p class="tool-card__usage">Use case: inspect API responses or clean config files before deployment.</p>
+          <span class="card-meta">2 tools</span>
+          <span class="tool-card__cta">Try now →</span>
+        </a>
+
+        <a class="tool-card" href="./regex-tools/">
+          <h3>Regex Tools</h3>
+          <p>Test patterns with highlighting, capture groups, flags, and clear error messages.</p>
+          <p class="tool-card__usage">Use case: debug validation rules or extract values from text.</p>
+          <span class="card-meta">1 tool</span>
+          <span class="tool-card__cta">Try now →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/common.js"></script>
+</body>
+</html>

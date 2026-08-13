@@ -1,0 +1,31 @@
+{
+  "z": 3,
+  "a": 1,
+  "user": {
+    "id": 10,
+    "name": "Alice",
+    "active": true,
+    "roles": [
+      "admin",
+      "editor"
+    ],
+    "profile": {
+      "age": 25,
+      "city": "Tokyo"
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "name": "Book",
+      "price": 1200
+    },
+    {
+      "id": 2,
+      "name": "Pen",
+      "price": 100
+    }
+  ],
+  "flag": false,
+  "meta": null
+}

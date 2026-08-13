@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter – Beautify, Minify &amp; Validate JSON</title>
+  <meta name="description" content="Format, beautify, validate, and minify JSON online. Free lightweight JSON formatter with clear error messages — no signup required.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .json-input {
+      min-height: 280px;
+      resize: vertical;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .json-output {
+      min-height: 220px;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: auto;
+    }
+
+    .json-output:empty::before {
+      content: "Output will appear here.";
+      color: #94a3b8;
+    }
+
+    .info-card {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .info-card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: var(--text-muted);
+    }
+
+    .info-card ul {
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Formatter",
+    "url": "./",
+    "applicationCategory": "Utility",
+    "operatingSystem": "All",
+    "description": "Format, beautify, validate, and minify JSON online. Free lightweight JSON formatter with clear error messages — no signup required."
+  }
+  </script>
+</head>
+<body data-root="../">
+  <div id="site-header"></div>
+
+  <main class="tool-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a> ›
+      <a href="../json-tools/">JSON Tools</a> ›
+      <span aria-current="page">JSON Formatter</span>
+    </nav>
+
+    <h1>JSON Formatter</h1>
+    <p class="tool-desc">Paste raw JSON to beautify, validate, or minify it. Spot syntax errors quickly and copy clean output for APIs, configs, and debugging. Runs entirely in your browser.</p>
+
+    <div class="tool-body">
+      <form class="tool-form" id="json-formatter-form">
+        <div class="form-group">
+          <label for="json-input">Input JSON</label>
+          <textarea id="json-input" class="json-input" placeholder='{"name":"YOS Tools","items":[1,2,3]}'></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="json-file">Upload JSON file</label>
+          <input id="json-file" type="file" accept=".json,application/json">
+          <p class="form-hint">Upload one JSON file. The file is read locally and never stored.</p>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" data-action="beautify">Beautify</button>
+          <button type="button" class="btn btn-secondary" data-action="minify">Minify</button>
+          <button type="button" class="btn btn-secondary" data-action="validate">Validate</button>
+          <button type="button" class="btn btn-secondary" data-action="sort">Sort Keys</button>
+          <button type="button" class="btn btn-secondary" data-action="download">Download</button>
+        </div>
+
+        <div class="result-panel">
+          <div class="result-label">Output</div>
+          <pre id="json-output" class="json-output" aria-live="polite"></pre>
+          <div id="json-error" class="result-error" role="alert"></div>
+        </div>
+      </form>
+    </div>
+
+    <section class="info-card" aria-labelledby="privacy-heading">
+      <h2 id="privacy-heading">Privacy</h2>
+      <p>Files are processed locally in your browser and are never uploaded or stored.</p>
+    </section>
+
+    <section class="info-card" aria-labelledby="use-cases-heading">
+      <h2 id="use-cases-heading">Use cases</h2>
+      <ul>
+        <li>Format API responses for easier reading.</li>
+        <li>Minify configuration files before deployment.</li>
+        <li>Validate JSON before sending it to an app or service.</li>
+        <li>Sort object keys for consistent diffs and snapshots.</li>
+      </ul>
+    </section>
+
+    <aside class="related-links">
+      <h2 class="related-links__title">Explore more</h2>
+      <ul class="related-links__list">
+        <li><a href="../json-tools/">All JSON Tools</a></li>
+        <li><a href="../time-conversion/">Time Conversion Tools</a></li>
+        <li><a href="../regex-tools/">Regex Tools</a></li>
+      </ul>
+      <p class="related-links__category">
+        <a href="../json-tools/">Browse all JSON Tools</a>
+      </p>
+    </aside>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
