@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml
