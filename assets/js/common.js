@@ -97,7 +97,19 @@
     saveTheme(next);
   }
 
+  function loadAnalytics() {
+    if (document.getElementById("ga-script")) return;
+
+    var root = getRootPath();
+    var script = document.createElement("script");
+    script.id = "ga-script";
+    script.src = root + "assets/ga.js";
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
   function init() {
+    loadAnalytics();
     renderHeader();
     applyTheme(getPreferredTheme());
     renderFooter();
