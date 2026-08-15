@@ -222,6 +222,20 @@ main {
   color: var(--text);
 }
 
+/* Tools section intro */
+
+.tools-section {
+  margin-bottom: 1rem;
+}
+
+.tools-section__intro {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 40rem;
+  margin: -0.25rem 0 1.5rem;
+}
+
 /* Tools grid */
 
 .tools-grid {
@@ -231,7 +245,8 @@ main {
 }
 
 .tool-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -244,14 +259,55 @@ main {
 .tool-card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
-  border-color: #d0d0d0;
+  border-color: var(--accent);
   color: inherit;
+}
+
+.tool-card__category {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
 }
 
 .tool-card h3 {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.625rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.tool-card__lead {
+  font-size: 0.975rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 0.625rem;
+}
+
+.tool-card__example {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.tool-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 
 .tool-card p {
@@ -259,12 +315,21 @@ main {
   color: var(--text-muted);
 }
 
-.card-meta {
-  display: inline-block;
-  margin-top: 0.75rem;
-  font-size: 0.8125rem;
+.tool-card__cta {
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--accent);
+  white-space: nowrap;
+}
+
+.tool-card:hover .tool-card__cta {
+  color: var(--accent-hover);
+}
+
+.card-meta {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 /* Related / internal links */
