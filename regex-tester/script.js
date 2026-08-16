@@ -239,18 +239,43 @@
       '    <button type="button" class="regex-preset" data-pattern="https?:\\/\\/[^\\s]+" data-text="Visit https://example.com now">URL</button>',
       '  </div>',
       '  <h2>How to use regex flags (with examples)</h2>',
-      '  <h3>g (global)</h3>',
-      '  <pre><code>Pattern: \\b\\w+\\b\nText: Hello world\n→ With g, both "Hello" and "world" are matched</code></pre>',
-      '  <h3>i (ignore case)</h3>',
-      '  <pre><code>Pattern: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\nText: Name@EXAMPLE.COM\n→ With i, uppercase letters in the address are accepted</code></pre>',
-      '  <h3>m (multiline)</h3>',
-      '  <pre><code>Pattern: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\nText:\nname@example.com\nnot-an-email\nuser@test.org\n→ With m, ^ and $ apply to each line</code></pre>',
-      '  <h3>s (dotAll)</h3>',
-      '  <pre><code>Pattern: https?:\\/\\/.*\nText: Visit https://example.com\n/page now\n→ With s, the dot matches the newline in the URL path</code></pre>',
-      '  <h3>u (unicode)</h3>',
-      '  <pre><code>Pattern: \\b\\w+\\b\nText: Hello こんにちは\n→ With u, Unicode letters are treated as word characters</code></pre>',
-      '  <h3>y (sticky)</h3>',
-      '  <pre><code>Pattern: \\d+\nText: Order 123 shipped at 09:30\n→ With y, matching only succeeds at the current search position</code></pre>',
+      '  <p class="regex-flag-example__hint">Load an example, then toggle the flag button above to see how the match highlights change.</p>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>g (global)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>g off:</strong> only the first number (<code>123</code>) is highlighted. <strong>g on:</strong> every number (<code>123</code>, <code>09</code>, <code>30</code>) is highlighted.</p>',
+      '    <pre><code>Pattern: \\d+\nText: Order 123 shipped at 09:30</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="\\d+" data-text="Order 123 shipped at 09:30">Load example</button>',
+      '  </div>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>i (ignore case)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>i off:</strong> <code>Hello</code> does not match pattern <code>hello</code> — letter case must match exactly. <strong>i on:</strong> case is ignored, so <code>Hello</code> matches.</p>',
+      '    <pre><code>Pattern: hello\nText: Hello</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="hello" data-text="Hello">Load example</button>',
+      '  </div>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>m (multiline)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>m</strong> only affects <code>^</code> and <code>$</code> — it makes them match the start/end of each line instead of the whole text. Pattern <code>^ok$</code> means “this entire line is exactly ok”. <strong>m off:</strong> no match. <strong>m on:</strong> the middle line <code>ok</code> matches.</p>',
+      '    <pre><code>Pattern: ^ok$\nText:\nnot ok\nok\nok again</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="^ok$" data-text="not ok\\nok\\nok again">Load example</button>',
+      '  </div>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>s (dotAll)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>s</strong> lets <code>.</code> match newline characters. <strong>s off:</strong> the dot does not cross lines — no match. <strong>s on:</strong> <code>.*</code> matches from <code>Hello</code> through the newline to <code>world</code>.</p>',
+      '    <pre><code>Pattern: Hello.*world\nText: Hello\\nworld</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="Hello.*world" data-text="Hello\\nworld">Load example</button>',
+      '  </div>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>u (unicode)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>u</strong> enables Unicode property escapes such as <code>\\p{Script=Hiragana}</code>. Without <strong>u</strong>, the pattern does not match Japanese text. Also note: in JavaScript, <code>\\w</code> matches only <code>A–Z</code>, <code>a–z</code>, <code>0–9</code>, and <code>_</code> — even with <strong>u</strong>, Japanese and emoji are not included. <strong>u off:</strong> no match. <strong>u on:</strong> <code>こんにちは</code> is highlighted.</p>',
+      '    <pre><code>Pattern: \\p{Script=Hiragana}+\nText: Hello こんにちは\nFlags: u required</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="\\p{Script=Hiragana}+" data-text="Hello こんにちは">Load example</button>',
+      '  </div>',
+      '  <div class="regex-flag-example-block">',
+      '    <h3>y (sticky)</h3>',
+      '    <p class="regex-flag-example__hint"><strong>y off:</strong> the engine finds <code>123</code> anywhere in the text. <strong>y on:</strong> matching must start at position 0, so there is no match.</p>',
+      '    <pre><code>Pattern: \\d+\nText: abc 123 def</code></pre>',
+      '    <button type="button" class="regex-preset regex-flag-example" data-pattern="\\d+" data-text="abc 123 def">Load example</button>',
+      '  </div>',
       '</div>'
     ].join("");
 
@@ -266,9 +291,22 @@
     var flagKeys = ["g", "i", "m", "s", "u", "y"];
     var activeFlags = "";
 
-    function applyPreset(pattern, text) {
+    function decodePresetText(text) {
+      if (!text) return text;
+      return text.replace(/\\n/g, "\n").replace(/\\t/g, "\t");
+    }
+
+    function applyPreset(pattern, text, flags) {
       patternEl.value = pattern;
-      textEl.value = text;
+      textEl.value = decodePresetText(text);
+      if (typeof flags === "string") {
+        activeFlags = flags;
+        renderFlags();
+      }
+      [patternEl, textEl].forEach(function (el) {
+        el.style.height = "auto";
+        el.style.height = el.scrollHeight + "px";
+      });
       updateResults();
     }
 
@@ -318,10 +356,18 @@
       errorsEl.innerHTML = result.error ? '<li>' + escapeHtml(result.error) + '</li>' : '<li>No errors.</li>';
     }
 
-    var presetButtons = app.querySelectorAll(".regex-preset");
+    var presetButtons = app.querySelectorAll(".regex-preset, .regex-flag-example");
     presetButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-        applyPreset(button.getAttribute("data-pattern"), button.getAttribute("data-text"));
+        var initialFlags = undefined;
+        if (button.classList.contains("regex-flag-example")) {
+          initialFlags = button.hasAttribute("data-flags") ? button.getAttribute("data-flags") : "";
+        }
+        applyPreset(
+          button.getAttribute("data-pattern"),
+          button.getAttribute("data-text"),
+          initialFlags
+        );
       });
     });
 

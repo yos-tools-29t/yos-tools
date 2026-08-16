@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YOS Tools テスト仕様書 &amp; 結果 — 2026-08-15T09:41:16.086Z</title>
+  <title>YOS Tools テスト仕様書 &amp; 結果 — 2026-08-16T14:38:42.379Z</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -97,11 +97,11 @@
 <body>
   <div class="wrap">
     <h1>YOS Tools テスト仕様書 &amp; 実行結果</h1>
-    <p class="meta">実行日時: 2026/8/15 18:41:16 (JST) &nbsp;|&nbsp; 対象: YOS Tools 静的サイト + クライアントサイドツールロジック</p>
+    <p class="meta">実行日時: 2026/8/16 23:38:42 (JST) &nbsp;|&nbsp; 対象: YOS Tools 静的サイト + クライアントサイドツールロジック</p>
 
     <div class="summary">
-      <div class="card total"><span>Total</span><strong>62</strong></div>
-      <div class="card pass"><span>Passed</span><strong>62</strong></div>
+      <div class="card total"><span>Total</span><strong>76</strong></div>
+      <div class="card pass"><span>Passed</span><strong>76</strong></div>
       <div class="card fail"><span>Failed</span><strong>0</strong></div>
       <div class="card"><span>Pass rate</span><strong>100%</strong></div>
     </div>
@@ -114,7 +114,7 @@
         <li><strong>DST</strong> — 米国東部・太平洋、EU 中央ヨーロッパのサマータイム開始/終了境界（分単位）</li>
         <li><strong>CONT</strong> — 連続入力（24時間分の分刻み変換、夏冬交替、JSON/Regex 連打、不正入力バースト）</li>
         <li><strong>JSON</strong> — Beautify / Minify / Validate / Sort / Diff</li>
-        <li><strong>REGEX</strong> — マッチング、プリセット、構文エラー、フラグ</li>
+        <li><strong>REGEX</strong> — Quick examples、フラグ例（g/i/m/s/u/y）の off/on 動作、decodePresetText、script 整合性</li>
       </ul>
     </section>
 
@@ -129,7 +129,7 @@
   <td><code>SITE-01</code></td>
   <td>Page exists: index.html</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.12 ms</td>
+  <td>0.11 ms</td>
   <td><pre>File found</pre></td>
 </tr>
 <tr class="pass">
@@ -164,14 +164,14 @@
   <td><code>SITE-06</code></td>
   <td>Page exists: json-tools/index.html</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.03 ms</td>
+  <td>0.02 ms</td>
   <td><pre>File found</pre></td>
 </tr>
 <tr class="pass">
   <td><code>SITE-07</code></td>
   <td>Page exists: regex-tools/index.html</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.02 ms</td>
+  <td>0.03 ms</td>
   <td><pre>File found</pre></td>
 </tr>
 <tr class="pass">
@@ -199,7 +199,7 @@
   <td><code>SITE-11</code></td>
   <td>Page exists: utc-to-jst/index.html</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.03 ms</td>
+  <td>0.04 ms</td>
   <td><pre>File found</pre></td>
 </tr>
 <tr class="pass">
@@ -234,7 +234,7 @@
   <td><code>SITE-16</code></td>
   <td>sitemap.xml includes privacy page</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.15 ms</td>
+  <td>0.11 ms</td>
   <td><pre>privacy/ listed in sitemap.xml</pre></td>
 </tr>
 <tr class="pass">
@@ -249,10 +249,10 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
 </tr>
 <tr class="pass">
   <td><code>SITE-18</code></td>
-  <td>Footer GitHub link points to repository</td>
+  <td>Footer does not include GitHub link</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.05 ms</td>
-  <td><pre>Repository URL confirmed</pre></td>
+  <td>0.06 ms</td>
+  <td><pre>No GitHub link in footer</pre></td>
 </tr>
 <tr class="pass">
   <td><code>SITE-19</code></td>
@@ -265,7 +265,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>SITE-20</code></td>
   <td>All tool pages load common.js</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.53 ms</td>
+  <td>0.51 ms</td>
   <td><pre>13 pages include common.js</pre></td>
 </tr></tbody>
   </table>
@@ -281,14 +281,14 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>UTC-01</code></td>
   <td>parseUtcInput accepts datetime-local format</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.74 ms</td>
+  <td>0.71 ms</td>
   <td><pre>2024-07-15T14:30:00.000Z</pre></td>
 </tr>
 <tr class="pass">
   <td><code>UTC-02</code></td>
   <td>parseUtcInput rejects invalid calendar date</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.05 ms</td>
+  <td>0.04 ms</td>
   <td><pre>Invalid date rejected</pre></td>
 </tr>
 <tr class="pass">
@@ -302,7 +302,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>UTC-04</code></td>
   <td>UTC to IST (+5:30)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.07 ms</td>
+  <td>0.06 ms</td>
   <td><pre>2024-01-15 17:30 IST</pre></td>
 </tr>
 <tr class="pass">
@@ -316,14 +316,14 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>UTC-06</code></td>
   <td>UTC to EST standard time (winter)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.05 ms</td>
+  <td>0.04 ms</td>
   <td><pre>2024-01-15 10:00 EST</pre></td>
 </tr>
 <tr class="pass">
   <td><code>UTC-07</code></td>
   <td>UTC to EST daylight time (summer)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.02 ms</td>
+  <td>0.01 ms</td>
   <td><pre>2024-07-15 10:00 EDT</pre></td>
 </tr>
 <tr class="pass">
@@ -353,7 +353,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>DST-EST-1</code></td>
   <td>EST spring before DST (2024-03-10T06:59 UTC)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.05 ms</td>
+  <td>0.02 ms</td>
   <td><pre>2024-03-10T06:59Z → EST</pre></td>
 </tr>
 <tr class="pass">
@@ -381,7 +381,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>DST-PST-1</code></td>
   <td>PST spring before DST (2024-03-10T09:59 UTC)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.01 ms</td>
+  <td>0.03 ms</td>
   <td><pre>2024-03-10T09:59Z → PST</pre></td>
 </tr>
 <tr class="pass">
@@ -395,7 +395,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>DST-PST-3</code></td>
   <td>PST fall before DST end (2024-11-03T08:59 UTC)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0 ms</td>
+  <td>0.01 ms</td>
   <td><pre>2024-11-03T08:59Z → PDT</pre></td>
 </tr>
 <tr class="pass">
@@ -453,49 +453,49 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>CONT-01</code></td>
   <td>EST: 1440 sequential minute inputs (24h)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>2.86 ms</td>
+  <td>4.27 ms</td>
   <td><pre>1440 conversions OK, last zone=EDT</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-02</code></td>
   <td>PST: rapid alternating summer/winter dates (100 cycles)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.29 ms</td>
+  <td>0.51 ms</td>
   <td><pre>100 summer/winter alternations stable</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-03</code></td>
   <td>CET: DST boundary sweep minute-by-minute (±120 min)</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.12 ms</td>
+  <td>0.25 ms</td>
   <td><pre>Single CET transition detected across 241 minutes</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-04</code></td>
   <td>JSON Formatter: 50 rapid beautify/minify alternations</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.29 ms</td>
+  <td>0.38 ms</td>
   <td><pre>50 beautify/minify cycles OK</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-05</code></td>
   <td>JSON Diff: 30 sequential compare with changing payloads</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.32 ms</td>
+  <td>0.36 ms</td>
   <td><pre>30 diff cycles OK</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-06</code></td>
   <td>Regex: 40 rapid pattern changes without throw</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.24 ms</td>
+  <td>0.21 ms</td>
   <td><pre>40 pattern switches OK</pre></td>
 </tr>
 <tr class="pass">
   <td><code>CONT-07</code></td>
   <td>parseUtcInput: burst of 200 malformed then valid inputs</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.12 ms</td>
+  <td>0.17 ms</td>
   <td><pre>200 malformed + 1 valid parse OK</pre></td>
 </tr></tbody>
   </table>
@@ -511,7 +511,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>JSON-01</code></td>
   <td>Beautify pretty-prints with 2-space indent</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.01 ms</td>
+  <td>0.05 ms</td>
   <td><pre>{
   &quot;b&quot;: 2,
   &quot;a&quot;: 1
@@ -542,7 +542,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>JSON-05</code></td>
   <td>Sort keys recursively</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.08 ms</td>
+  <td>0.07 ms</td>
   <td><pre>{ /   &quot;a&quot;: { /     &quot;b&quot;: 3, /     &quot;y&quot;: 2</pre></td>
 </tr>
 <tr class="pass">
@@ -556,7 +556,7 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
   <td><code>JSON-07</code></td>
   <td>Diff detects array length mismatch</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.01 ms</td>
+  <td>0.02 ms</td>
   <td><pre>$[2]</pre></td>
 </tr>
 <tr class="pass">
@@ -570,21 +570,21 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
 </section>
 <section class="suite">
   <header>
-    <h2>REGEX — Regex Tester ロジックテスト</h2>
-    <p class="suite-summary">5 passed, 0 failed (5 tests)</p>
+    <h2>REGEX — Regex Tester — フラグ例・プリセット・ロジック</h2>
+    <p class="suite-summary">19 passed, 0 failed (19 tests)</p>
   </header>
   <table>
     <thead><tr><th>ID</th><th>Test case</th><th>Result</th><th>Time</th><th>Detail</th></tr></thead>
     <tbody><tr class="pass">
   <td><code>REGEX-01</code></td>
-  <td>Global word matches</td>
+  <td>Quick example: global word matches</td>
   <td><span class="badge pass">PASS</span></td>
-  <td>0.04 ms</td>
+  <td>0.03 ms</td>
   <td><pre>Hello, world</pre></td>
 </tr>
 <tr class="pass">
   <td><code>REGEX-02</code></td>
-  <td>Email preset pattern matches valid email</td>
+  <td>Quick example: email preset</td>
   <td><span class="badge pass">PASS</span></td>
   <td>0.05 ms</td>
   <td><pre>name@example.com</pre></td>
@@ -598,17 +598,115 @@ Sitemap: https://yos-tools-29t.github.io/yos-tools/sitemap.xml</pre></td>
 </tr>
 <tr class="pass">
   <td><code>REGEX-04</code></td>
-  <td>Ignore case flag</td>
+  <td>Flag i example: Hello × hello (i off → no match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.01 ms</td>
+  <td><pre>(no matches)</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-05</code></td>
+  <td>Flag i example: Hello × hello (i on → match)</td>
   <td><span class="badge pass">PASS</span></td>
   <td>0.02 ms</td>
   <td><pre>Hello</pre></td>
 </tr>
 <tr class="pass">
-  <td><code>REGEX-05</code></td>
+  <td><code>REGEX-06</code></td>
+  <td>Flag g example: \d+ (g off → 1 match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.01 ms</td>
+  <td><pre>123</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-07</code></td>
+  <td>Flag g example: \d+ (g on → 3 matches)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.01 ms</td>
+  <td><pre>123, 09, 30</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-08</code></td>
+  <td>Flag m example: ^ok$ (m off → no match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.03 ms</td>
+  <td><pre>(no matches)</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-09</code></td>
+  <td>Flag m example: ^ok$ (m on → 1 match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>ok</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-10</code></td>
+  <td>Flag s example: Hello.*world (s off → no match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>(no matches)</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-11</code></td>
+  <td>Flag s example: Hello.*world (s on → match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>Hello\nworld</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-12</code></td>
+  <td>Flag u example: \p{Script=Hiragana}+ (u off → no match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>(no matches)</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-13</code></td>
+  <td>Flag u example: \p{Script=Hiragana}+ (u on → match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.38 ms</td>
+  <td><pre>こんにちは</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-14</code></td>
+  <td>\w with u does not match Japanese</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.1 ms</td>
+  <td><pre>gu matches: Hello</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-15</code></td>
+  <td>Flag y example: \d+ (y off → match 123)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>123</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-16</code></td>
+  <td>Flag y example: \d+ (y on → no match)</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.01 ms</td>
+  <td><pre>(no matches)</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-17</code></td>
+  <td>decodePresetText converts escaped newlines</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.02 ms</td>
+  <td><pre>&quot;not ok\nok\nok again&quot;</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-18</code></td>
+  <td>Regex Tester HTML includes flag example buttons</td>
+  <td><span class="badge pass">PASS</span></td>
+  <td>0.18 ms</td>
+  <td><pre>Flag examples present in script.js</pre></td>
+</tr>
+<tr class="pass">
+  <td><code>REGEX-19</code></td>
   <td>Empty pattern returns no matches</td>
   <td><span class="badge pass">PASS</span></td>
   <td>0.01 ms</td>
-  <td><pre>0 matches</pre></td>
+  <td><pre>(no matches)</pre></td>
 </tr></tbody>
   </table>
 </section>

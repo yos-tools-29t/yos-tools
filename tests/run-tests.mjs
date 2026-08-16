@@ -24,6 +24,7 @@ import {
   diffJson,
   listRegexMatches,
   testRegexSyntax,
+  decodePresetText,
   convertUtcInput,
 } from "./tool-logic.mjs";
 
@@ -448,16 +449,19 @@ test(json, "JSON-08", "Diff reports type mismatch (string vs number)", () => {
 });
 
 // --- Regex ---
-const regex = suite("REGEX", "Regex Tester ロジックテスト");
+const regex = suite("REGEX", "Regex Tester — フラグ例・プリセット・ロジック");
 
-test(regex, "REGEX-01", "Global word matches", () => {
-  const m = listRegexMatches("\\b\\w+\\b", "g", "Hello world");
-  assertEqual(m.length, 2, "Two words");
-  assertEqual(m[0].match, "Hello", "First match");
-  return m.map((x) => x.match).join(", ");
+function assertMatchCount(pattern, flags, text, expected, message) {
+  const m = listRegexMatches(pattern, flags, text);
+  assertEqual(m.length, expected, message);
+  return m.map((x) => x.match).join(", ") || "(no matches)";
+}
+
+test(regex, "REGEX-01", "Quick example: global word matches", () => {
+  return assertMatchCount("\\b\\w+\\b", "g", "Hello world", 2, "Two words");
 });
 
-test(regex, "REGEX-02", "Email preset pattern matches valid email", () => {
+test(regex, "REGEX-02", "Quick example: email preset", () => {
   const pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
   const m = listRegexMatches(pattern, "", "name@example.com");
   assertEqual(m.length, 1, "One match");
@@ -470,17 +474,86 @@ test(regex, "REGEX-03", "Invalid pattern returns syntax error", () => {
   return r.message;
 });
 
-test(regex, "REGEX-04", "Ignore case flag", () => {
-  const m = listRegexMatches("hello", "i", "Hello HELLO");
-  assertEqual(m.length, 1, "Non-global first match only");
-  assertEqual(m[0].match, "Hello", "Case insensitive");
-  return m[0].match;
+test(regex, "REGEX-04", "Flag i example: Hello × hello (i off → no match)", () => {
+  return assertMatchCount("hello", "", "Hello", 0, "Case sensitive");
 });
 
-test(regex, "REGEX-05", "Empty pattern returns no matches", () => {
-  const m = listRegexMatches("", "g", "abc");
-  assertEqual(m.length, 0, "No matches");
-  return "0 matches";
+test(regex, "REGEX-05", "Flag i example: Hello × hello (i on → match)", () => {
+  return assertMatchCount("hello", "i", "Hello", 1, "Ignore case");
+});
+
+test(regex, "REGEX-06", "Flag g example: \\d+ (g off → 1 match)", () => {
+  return assertMatchCount("\\d+", "", "Order 123 shipped at 09:30", 1, "First number only");
+});
+
+test(regex, "REGEX-07", "Flag g example: \\d+ (g on → 3 matches)", () => {
+  return assertMatchCount("\\d+", "g", "Order 123 shipped at 09:30", 3, "All numbers");
+});
+
+test(regex, "REGEX-08", "Flag m example: ^ok$ (m off → no match)", () => {
+  const text = decodePresetText("not ok\\nok\\nok again");
+  return assertMatchCount("^ok$", "", text, 0, "Whole string only");
+});
+
+test(regex, "REGEX-09", "Flag m example: ^ok$ (m on → 1 match)", () => {
+  const text = decodePresetText("not ok\\nok\\nok again");
+  return assertMatchCount("^ok$", "m", text, 1, "Middle line only");
+});
+
+test(regex, "REGEX-10", "Flag s example: Hello.*world (s off → no match)", () => {
+  const text = decodePresetText("Hello\\nworld");
+  return assertMatchCount("Hello.*world", "", text, 0, "Dot does not cross newline");
+});
+
+test(regex, "REGEX-11", "Flag s example: Hello.*world (s on → match)", () => {
+  const text = decodePresetText("Hello\\nworld");
+  const m = listRegexMatches("Hello.*world", "s", text);
+  assertEqual(m.length, 1, "Dot crosses newline");
+  assertEqual(m[0].match, "Hello\nworld", "Full span");
+  return m[0].match.replace("\n", "\\n");
+});
+
+test(regex, "REGEX-12", "Flag u example: \\p{Script=Hiragana}+ (u off → no match)", () => {
+  return assertMatchCount("\\p{Script=Hiragana}+", "", "Hello こんにちは", 0, "Property escape inactive");
+});
+
+test(regex, "REGEX-13", "Flag u example: \\p{Script=Hiragana}+ (u on → match)", () => {
+  return assertMatchCount("\\p{Script=Hiragana}+", "u", "Hello こんにちは", 1, "Hiragana matched");
+});
+
+test(regex, "REGEX-14", "\\w with u does not match Japanese", () => {
+  const withoutU = listRegexMatches("\\b\\w+\\b", "g", "Hello こんにちは");
+  const withU = listRegexMatches("\\b\\w+\\b", "gu", "Hello こんにちは");
+  assertEqual(withoutU.length, 1, "ASCII word only without u");
+  assertEqual(withU.length, 1, "Still ASCII only with u");
+  assertEqual(withoutU[0].match, "Hello", "Hello only");
+  return "gu matches: " + withU.map((x) => x.match).join(", ");
+});
+
+test(regex, "REGEX-15", "Flag y example: \\d+ (y off → match 123)", () => {
+  return assertMatchCount("\\d+", "", "abc 123 def", 1, "Find digits anywhere");
+});
+
+test(regex, "REGEX-16", "Flag y example: \\d+ (y on → no match)", () => {
+  return assertMatchCount("\\d+", "y", "abc 123 def", 0, "Must start at position 0");
+});
+
+test(regex, "REGEX-17", "decodePresetText converts escaped newlines", () => {
+  assertEqual(decodePresetText("Hello\\nworld"), "Hello\nworld", "Newline decoded");
+  return JSON.stringify(decodePresetText("not ok\\nok\\nok again"));
+});
+
+test(regex, "REGEX-18", "Regex Tester HTML includes flag example buttons", () => {
+  const js = read("regex-tester/script.js");
+  assertIncludes(js, "regex-flag-example", "Flag example buttons");
+  assertIncludes(js, "decodePresetText", "Preset newline decoder");
+  assertIncludes(js, 'data-pattern="hello" data-text="Hello"', "i example preset");
+  assertIncludes(js, "\\p{Script=Hiragana}+", "u example preset");
+  return "Flag examples present in script.js";
+});
+
+test(regex, "REGEX-19", "Empty pattern returns no matches", () => {
+  return assertMatchCount("", "g", "abc", 0, "No matches");
 });
 
 // --- Generate HTML ---
@@ -642,7 +715,7 @@ const html = `<!DOCTYPE html>
         <li><strong>DST</strong> — 米国東部・太平洋、EU 中央ヨーロッパのサマータイム開始/終了境界（分単位）</li>
         <li><strong>CONT</strong> — 連続入力（24時間分の分刻み変換、夏冬交替、JSON/Regex 連打、不正入力バースト）</li>
         <li><strong>JSON</strong> — Beautify / Minify / Validate / Sort / Diff</li>
-        <li><strong>REGEX</strong> — マッチング、プリセット、構文エラー、フラグ</li>
+        <li><strong>REGEX</strong> — Quick examples、フラグ例（g/i/m/s/u/y）の off/on 動作、decodePresetText、script 整合性</li>
       </ul>
     </section>
 

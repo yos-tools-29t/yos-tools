@@ -191,6 +191,11 @@ export function listRegexMatches(pattern, flags, text) {
   return matches;
 }
 
+export function decodePresetText(text) {
+  if (!text) return text;
+  return text.replace(/\\n/g, "\n").replace(/\\t/g, "\t");
+}
+
 export function testRegexSyntax(pattern, flags = "") {
   try {
     new RegExp(pattern, flags);
