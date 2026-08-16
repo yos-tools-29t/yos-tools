@@ -175,6 +175,8 @@
   function handleConvert(event) {
     if (event) event.preventDefault();
 
+    clearResult();
+
     var input = document.getElementById("utc-input");
     var value = input ? input.value : "";
 

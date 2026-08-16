@@ -156,6 +156,8 @@
       return;
     }
 
+    clearResult();
+
     var value = inputUTC.value;
     if (!value) {
       showError("Please enter a valid UTC date and time.");

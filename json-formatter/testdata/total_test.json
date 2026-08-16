@@ -1,0 +1,67 @@
+{
+  "trailing_comma_object": {
+    "name": "k",
+    "age": 30,
+  },
+
+  "trailing_comma_array": [1, 2, 3,],
+
+  "json_with_comments": {
+    // comment line
+    "valid": false
+  },
+
+  "single_quotes": {
+    'key': 'value',
+    'num': 123
+  },
+
+  "duplicate_keys": {
+    "id": 1,
+    "id": 2
+  },
+
+  "big_numbers": {
+    "normal": 12345,
+    "big_int": 9999999999999999999999999999,
+    "overflow_float": 1e309
+  },
+
+  "escape_hell": {
+    "text": "Line1\nLine2\tTabbed \"quoted\" \\ backslash \u3042"
+  },
+
+  "weird_keys": {
+    "": "empty key",
+    "   ": "spaces",
+    "\n": "newline key",
+    "😀": "emoji key"
+  },
+
+  "deep_nesting": [
+    1,
+    "string",
+    null,
+    { "a": [1, 2, { "b": [3, 4, [5, 6]] }] },
+    true
+  ],
+
+  "incomplete_json": {
+    "user": {
+      "name": "k",
+      "age": 30,
+      "skills": [
+        "coding",
+        "ai",
+  },
+
+  "non_object_top_levels": [
+    true,
+    123,
+    "just a string"
+  ],
+
+  "ugly_spacing": {    "a":1,"b":   { "c":[1,2,3], "d" :   4 }   },
+
+  "bom_like": "\uFEFF   { \"valid\": true }   "
+}

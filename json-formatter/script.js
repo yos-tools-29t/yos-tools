@@ -16,8 +16,15 @@
   }
 
   function setError(message) {
+    outputEl.textContent = "";
     errorEl.textContent = message;
     outputEl.classList.add("is-error");
+  }
+
+  function clearOutput() {
+    outputEl.textContent = "";
+    outputEl.classList.remove("is-error");
+    errorEl.textContent = "";
   }
 
   function sortKeys(value) {
@@ -59,6 +66,10 @@
   }
 
   function handleAction(action) {
+    if (action !== "download") {
+      clearOutput();
+    }
+
     var rawInput = inputEl.value.trim();
 
     if (!rawInput) {

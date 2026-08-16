@@ -14,7 +14,15 @@
   }
 
   function setError(message) {
+    outputEl.innerHTML = "";
+    outputEl.classList.add("is-empty");
     errorEl.textContent = message;
+  }
+
+  function clearDiffResult() {
+    outputEl.innerHTML = "";
+    outputEl.classList.add("is-empty");
+    errorEl.textContent = "";
   }
 
   function readFileAsText(file, callback) {
@@ -165,6 +173,8 @@
 
   function init() {
     document.getElementById("compare-btn").addEventListener("click", function () {
+      clearDiffResult();
+
       var left = leftInputEl.value.trim();
       var right = rightInputEl.value.trim();
 
@@ -187,8 +197,7 @@
       rightInputEl.value = "";
       leftFileEl.value = "";
       rightFileEl.value = "";
-      setDiffOutput("");
-      errorEl.textContent = "";
+      clearDiffResult();
     });
 
     attachFileHandlers();

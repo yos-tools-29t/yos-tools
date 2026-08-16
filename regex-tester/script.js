@@ -290,6 +290,13 @@
     }
 
     function updateResults() {
+      previewEl.innerHTML = "";
+      groupsEl.innerHTML = "";
+      flagListEl.innerHTML = "";
+      errorsEl.innerHTML = "";
+      errorEl.textContent = "";
+      patternEl.classList.remove("error");
+
       var pattern = patternEl.value;
       var text = textEl.value;
       var result = testRegex(pattern, activeFlags, text);
