@@ -49,7 +49,6 @@
       '    <a href="' + root + 'regex-tools/">Regex Tools</a>' +
       '    <a href="' + root + 'about/">About</a>' +
       '    <a href="' + root + 'privacy/">Privacy</a>' +
-      '    <a href="https://github.com/yos-tools-29t/yos-tools" target="_blank" rel="noreferrer">GitHub</a>' +
       '    <a href="' + root + 'sitemap.html">Sitemap</a>' +
       "  </nav>" +
       "  <p>&copy; " + CURRENT_YEAR + " " + SITE_NAME + ". All rights reserved.</p>" +
